@@ -8,8 +8,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name:  downlode repo from github
-        uses:  actions/checkout@v4
+      -  name:  downlode repo from github
+         uses:  actions/checkout@v4
+
+      -  name:  verify file
+         run:  |
+          ls
+          
+      -  name:  Download File
+         uses:  actions/uplod-artifact@v4
+         with:
+           name: website-file
+           path: index.html
+
+  cdjob:
+    runs-on: ubuntu-latest
+
+    steps:
+      -  name:  Download from artifact
+         uses:  actions/download-artifact@v4
+         with:
+           name:  website-file
+           
+      -  name: Configure AWS Credentials
+         uses: aws-actions/configure-aws-credentials@v4
+         with:
+            aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+            aws-secret-access-key: ${{ secrets.ACCESS_SECRET_KEY }}
+            aws-region:  ap-south-1
+
+      
+      -  name: Upload file to S3
+         run: aws s3 sync index.html s3://actions.s3/
+    
+      
 
     
          
