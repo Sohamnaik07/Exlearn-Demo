@@ -16,7 +16,7 @@ jobs:
           ls
           
       -  name:  Download File
-         uses:  actions/uplod-artifact@v4
+         uses:  actions/upload-artifact@v4
          with:
            name: website-file
            path: index.html
