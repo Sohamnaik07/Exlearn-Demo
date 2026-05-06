@@ -40,7 +40,7 @@ jobs:
 
       
       -  name: Upload file to S3
-         run: aws s3 sync index.html s3://actions.s3/
+         run: aws s3 cp index.html s3://actions.s3/
     
       
 
