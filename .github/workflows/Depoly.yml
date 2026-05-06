@@ -22,6 +22,7 @@ jobs:
            path: index.html
 
   cdjob:
+    needs:  cijob
     runs-on: ubuntu-latest
 
     steps:
